@@ -1,9 +1,3 @@
-.app {
-  background-color: #fff;
-  height: 100vh;
-  width: 100vw;
-}
-
 .global-header {
   align-items: center;
   background: #002A42;
@@ -11,9 +5,44 @@
   box-sizing: border-box;
   display: flex;
   height: 50px;
-  left: 0px;
   padding: 0px 24px;
-  position: absolute;
-  top: 0px;
   width: 100%;
+}
+
+.devices-header {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 38px;
+  justify-content: space-between;
+  margin: 24px 0;
+  padding: 0 24px;
+}
+
+.devices-header_title {
+  color: #211F33;
+  font-family: 'Inter';
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24.2px;
+}
+
+.devices-header_add-device {
+  background: #337AB7;
+  border: 1px solid #337AB7;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Inter';
+  font-size: 14px;
+  font-weight: 500;
+  height: 38px;
+  padding: 12px;
+  line-height: 14px;
+  width: 121px;
+}
+
+.plus-icon {
+  display: inline;
+  margin-right: 7px;
 }
