@@ -1,0 +1,15 @@
+.table-actions {
+    display: flex;
+    flex-direction: row;
+    margin: 24px 0;
+    padding: 0 24px;
+    gap: 10px;
+}
+
+.refresh-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 0 10px;
+}
