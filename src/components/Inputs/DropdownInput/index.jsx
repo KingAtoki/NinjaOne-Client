@@ -11,22 +11,16 @@ export const DropdownInput = ({
   prefix = "",
   value,
   onChange = () => { },
+  ...rest
 }) => {
-
   const [prefixWidth, setPrefixWidth] = useState(0);
   const prefixRef = useRef(null);
-
-  const handleChange = (e) => {
-    const newValue = e.target.value;
-    onChange(newValue);
-  };
 
   useEffect(() => {
     if (!prefixRef.current) {
       return;
     }
     setPrefixWidth(prefixRef.current?.offsetWidth);
-
   }, []);
 
   return (
@@ -34,11 +28,12 @@ export const DropdownInput = ({
       {prefix && <span className='prefix' ref={prefixRef}>{prefix}</span>}
       <select
         value={value}
-        onChange={handleChange}
-        style={{ paddingLeft: `${prefixWidth + 18}px`, }}
+        onChange={onChange}
+        style={prefixWidth ? { paddingLeft: `${prefixWidth + 18}px` } : { width: '100%' }}
+        {...rest}
       >
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
+          <option key={option.value} value={option.value} {...option}>
             {option.label}
           </option>
         ))}
