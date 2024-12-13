@@ -57,6 +57,12 @@
   font-weight: 100;
 }
 
+.input-wrapper input::-webkit-outer-spin-button,
+.input-wrapper input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .search-icon {
   margin-left: 12px;
   height: 15px;

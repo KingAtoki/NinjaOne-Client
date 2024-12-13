@@ -74,7 +74,7 @@ export const AddEditForm = () => {
                     name={HDD_CAPACITY}
                     value={addDeviceData[HDD_CAPACITY]}
                     onChange={handleChange}
-                    min='0'
+                    type='number'
                     width='490px'
                 />
             </div>
