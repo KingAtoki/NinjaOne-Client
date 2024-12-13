@@ -1,10 +1,8 @@
-import { useState } from 'react';
-
 import NinjaOneLogo from './assets/ninjaone-logo.svg'
 import plus from './assets/plus.svg'
 import { DevicesTable } from './components/DevicesTable';
 import { TableActions } from './components/TableActions';
-import { ADD, ALL, NAME_DESC } from './constants';
+import { ADD } from './constants';
 import { useDevices } from './contexts/DevicesContext';
 import { useModal } from './contexts/ModalContext';
 import { ModalManager } from './components/ModalManager';
@@ -12,17 +10,8 @@ import { ModalManager } from './components/ModalManager';
 import './App.css'
 
 function App() {
-  const [filter, setFilter] = useState('')
-  const [deviceType, setDeviceType] = useState(ALL)
-  const [sortMethod, setSortMethod] = useState(NAME_DESC)
   const { toggleModal } = useModal()
   const { devices } = useDevices()
-
-  const onRefresh = () => {
-    setFilter('')
-    setDeviceType(ALL)
-    setSortMethod(NAME_DESC)
-  }
 
   const openAddModal = () => {
     toggleModal(ADD)
@@ -41,15 +30,7 @@ function App() {
           Add device
         </button>
       </div>
-      <TableActions
-        filter={filter}
-        setFilter={setFilter}
-        deviceType={deviceType}
-        setDeviceType={setDeviceType}
-        sortMethod={sortMethod}
-        setSortMethod={setSortMethod}
-        onRefresh={onRefresh}
-      />
+      <TableActions />
       <DevicesTable devices={devices} />
     </div>
   )

@@ -9,7 +9,7 @@ export const formatDevicesForUI = (devices) => {
         return {
             ...device,
             [SYSTEM_NAME]: device.system_name,
-            [DEVICE_TYPE]: device.type,
+            [DEVICE_TYPE]: `${capitalize(device.type)} workstation`,
             [HDD_CAPACITY]: device.hdd_capacity
         }
     })

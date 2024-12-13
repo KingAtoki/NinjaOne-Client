@@ -1,34 +1,36 @@
-import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 import { DropdownInput } from '../Inputs/DropdownInput';
 import { SearchInput } from '../Inputs/SearchInput';
-import {  ALL, deviceTypes, sortMethods } from '../../constants';
+import { ALL, deviceTypes, NAME_DESC, sortMethods } from '../../constants';
 
 import RefreshIcon from '../../assets/refresh.svg';
 
 import './index.css';
 
-export const TableActions = ({
-    filter,
-    setFilter,
-    deviceType,
-    setDeviceType,
-    sortMethod,
-    setSortMethod,
-    onRefresh,
-}) => {
+export const TableActions = () => {
+    const [filter, setFilter] = useState('')
+    const [deviceType, setDeviceType] = useState(ALL)
+    const [sortMethod, setSortMethod] = useState(NAME_DESC)
+
+    const onRefresh = () => {
+        setFilter('')
+        setDeviceType(ALL)
+        setSortMethod(NAME_DESC)
+    }
+
     return (
         <div className='table-actions'>
-            <SearchInput value={filter} onChange={setFilter} />
+            <SearchInput value={filter} onChange={e => setFilter(e.target.value)} />
             <DropdownInput
                 prefix="Device Type:"
-                onChange={setDeviceType}
+                onChange={e => setDeviceType(e.target.value)}
                 options={[{ value: ALL, label: ALL }, ...deviceTypes]}
                 value={deviceType}
             />
             <DropdownInput
                 prefix="Sort By:"
-                onChange={setSortMethod}
+                onChange={e => setSortMethod(e.target.value)}
                 options={sortMethods}
                 value={sortMethod}
             />
@@ -38,13 +40,3 @@ export const TableActions = ({
         </div>
     )
 }
-
-TableActions.propTypes = {
-    filter: PropTypes.string.isRequired,
-    setFilter: PropTypes.func.isRequired,
-    deviceType: PropTypes.string.isRequired,
-    setDeviceType: PropTypes.func.isRequired,
-    sortMethod: PropTypes.string.isRequired,
-    setSortMethod: PropTypes.func.isRequired,
-    onRefresh: PropTypes.func.isRequired,
-};

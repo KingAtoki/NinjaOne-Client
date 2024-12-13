@@ -19,9 +19,9 @@ const EDIT = 'edit';
 const DELETE = 'delete';
 
 const deviceTypes = [
-    { value: WINDOWS, label: WINDOWS },
-    { value: MAC, label: MAC },
-    { value: LINUX, label: LINUX },
+    { value: WINDOWS, label: `${WINDOWS} workstation` },
+    { value: MAC, label: `${MAC} workstation` },
+    { value: LINUX, label: `${LINUX} workstation` },
 ];
 
 const sortMethods = [
