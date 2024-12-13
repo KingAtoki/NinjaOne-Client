@@ -11,5 +11,5 @@
     min-width: 120px;
     position: absolute;
     right: 35px;
-    z-index: 1000;
+    z-index: 999;
 }

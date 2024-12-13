@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
-import { Fragment,useState } from 'react';
+import { Fragment, useState } from 'react';
 
 import { EditDeleteButton } from '../EditDeleteButton';
-import { LINUX, MAC, WINDOWS } from '../../constants';
-import { capitalize } from '../../utils';
-
 import AppleIcon from '../../assets/apple.svg';
 import WindowsIcon from '../../assets/windows.svg';
 import LinuxIcon from '../../assets/linux.svg';
+import { LINUX, MAC, WINDOWS } from '../../constants';
+import { capitalize } from '../../utils';
+
 
 import './index.css';
 
@@ -27,13 +27,6 @@ const getIcon = (type) => {
 export const DevicesTable = ({ devices }) => {
     const [activeRow, setActiveRow] = useState(null)
 
-    const onEdit = (device) => {
-        console.log('Edit', device)
-    }
-
-    const onDelete = (device) => {
-        console.log('Delete', device)
-    }
     return (
         <div className="device-table" onMouseLeave={() => setActiveRow(null)}>
             <span>Device</span>
@@ -53,7 +46,7 @@ export const DevicesTable = ({ devices }) => {
                             </div>
                             <div className='device-table_row--right-content'>
                                 {device.id === activeRow?.id && <div className="device-table_row--actions">
-                                    <EditDeleteButton onDelete={onDelete} onEdit={onEdit} />
+                                    <EditDeleteButton deviceId={device.id} />
                                 </div>}
                             </div>
                         </div>

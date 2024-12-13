@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import { DropdownInput } from '../Inputs/DropdownInput';
 import { SearchInput } from '../Inputs/SearchInput';
-import {  deviceTypes, sortMethods } from '../../constants';
+import {  ALL, deviceTypes, sortMethods } from '../../constants';
 
 import RefreshIcon from '../../assets/refresh.svg';
 
@@ -23,7 +23,7 @@ export const TableActions = ({
             <DropdownInput
                 prefix="Device Type:"
                 onChange={setDeviceType}
-                options={deviceTypes}
+                options={[{ value: ALL, label: ALL }, ...deviceTypes]}
                 value={deviceType}
             />
             <DropdownInput

@@ -1,16 +1,26 @@
 import PropTypes from 'prop-types';
 
 import { Popover } from "../Popover"
-
+import { useModal } from '../../contexts/ModalContext';
 import ThreeDotIcon from '../../assets/three-dot.svg';
 
 import './index.css';
+import { DELETE, EDIT } from '../../constants';
 
-export const EditDeleteButton = ({ onEdit, onDelete }) => {
+export const EditDeleteButton = ({ deviceId = null }) => {
+    const { toggleModal } = useModal()
+
+    const openEditModal = () => {
+        toggleModal(EDIT, deviceId)
+    }
+    const openDeleteModal = () => {
+        toggleModal(DELETE, deviceId)
+    }
+
     const content = (
         <div className="edit-delete-content">
-            <button onClick={onEdit}>Edit</button>
-            <button onClick={onDelete}>Delete</button>
+            <button onClick={openEditModal}>Edit</button>
+            <button onClick={openDeleteModal}>Delete</button>
         </div>
     );
     return (
@@ -25,6 +35,5 @@ export const EditDeleteButton = ({ onEdit, onDelete }) => {
 }
 
 EditDeleteButton.propTypes = {
-    onEdit: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired,
+    deviceId: PropTypes.number,
 };  
