@@ -1,0 +1,52 @@
+.device-table {
+    padding: 0 24px;
+}
+
+.device-table>span {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 10px;
+    height: 30px;
+}
+
+hr {
+    color: #E7E8EB;
+    background: #E7E8EB;
+    border: 0;
+    height: 1px;
+}
+
+.device-table_row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.device-table_row:hover {
+    background: #F4F4F5;
+}
+
+.device-table_row--header {
+    align-items: center;
+    display: flex;
+    gap: 5px;
+}
+
+.device-table_row--header img {
+    height: 15px;
+    width: 15px;
+}
+
+.device-table_row--device-details {
+    color: #6E6D7A;
+    font-size: 12px;
+}
+
+.device-table_row--right-content {
+    margin: auto 0;
+}
+
+.device-table_row--actions {
+    margin-left: auto;
+}

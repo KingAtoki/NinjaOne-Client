@@ -1,0 +1,15 @@
+.popover-container {
+    height: 100%;
+    width: 100%;
+}
+
+.popover {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    font-size: 14px;
+    margin-top: 8px;
+    min-width: 120px;
+    position: absolute;
+    right: 35px;
+    z-index: 1000;
+}

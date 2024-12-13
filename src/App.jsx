@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { DevicesTable } from './components/DevicesTable';
 import { TableActions } from './components/TableActions';
 import { ALL, NAME_DESC } from './constants';
 
@@ -7,6 +8,27 @@ import NinjaOneLogo from './assets/ninjaone-logo.svg'
 import plus from './assets/plus.svg'
 
 import './App.css'
+
+const testDevices = [
+  {
+    id: 1,
+    system_name: 'DESKTOP-ONE',
+    type: 'WINDOWS',
+    hdd_capacity: '92',
+  },
+  {
+    id: 2,
+    system_name: 'DESKTOP-TWO',
+    type: 'MAC',
+    hdd_capacity: '256',
+  },
+  {
+    id: 3,
+    system_name: 'DESKTOP-THREE',
+    type: 'LINUX',
+    hdd_capacity: '512',
+  },
+]
 
 function App() {
   const [filter, setFilter] = useState('')
@@ -37,6 +59,7 @@ function App() {
         setSortMethod={setSortMethod}
         onRefresh={onRefresh}
       />
+      <DevicesTable devices={testDevices} />
     </div>
   )
 }
