@@ -21,7 +21,6 @@
 
 .devices-header_title {
   color: #211F33;
-  font-family: 'Inter';
   font-size: 20px;
   font-weight: 500;
   line-height: 24.2px;
@@ -33,7 +32,6 @@
   border-radius: 4px;
   color: #fff;
   cursor: pointer;
-  font-family: 'Inter';
   font-size: 14px;
   height: 38px;
   padding: 12px;

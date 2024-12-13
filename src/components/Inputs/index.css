@@ -11,14 +11,12 @@
   .input-wrapper .prefix  {
     position: absolute;
     left: 12px;
-    font-family: 'Inter';
     font-size: 14px;
     color:#211F33;
   }
 
   .input-wrapper .suffix {
     position: absolute;
-    font-family: 'Inter';
     font-size: 14px;
     color:#211F33;
     pointer-events: none;
@@ -32,7 +30,6 @@
     background: none;
     border: none;
     color: #211F33;
-    font-family: 'Inter';
     font-size: 14px;
     height: 38px;
     line-height: 21px;
@@ -43,7 +40,6 @@
   
   .input-wrapper select {
     position: relative;
-    font-family: 'Inter';
     font-size: 14px;
   }
   
