@@ -1,4 +1,3 @@
-const ALL = 'All';
 const WINDOWS_WORKSTATION = 'Windows workstation';
 const MAC_WORKSTATION = 'Mac workstation';
 const LINUX_WORKSTATION = 'Linux workstation';
@@ -32,7 +31,6 @@ const sortMethods = [
 ]
 
 export {
-    ALL,
     NAME,
     CAPACITY,
     DESC,
