@@ -39,7 +39,7 @@ export const AddEditForm = () => {
         <form className="device-form">
             <div className="form-group">
                 <label htmlFor={SYSTEM_NAME}>
-                    {SYSTEM_NAME} *
+                    Name *
                 </label>
                 <CommonInput
                     id={SYSTEM_NAME}
@@ -52,7 +52,7 @@ export const AddEditForm = () => {
 
             <div className="form-group">
                 <label htmlFor={DEVICE_TYPE}>
-                    {DEVICE_TYPE} *
+                    Type *
                 </label>
                 <DropdownInput
                     required
@@ -67,7 +67,7 @@ export const AddEditForm = () => {
 
             <div className="form-group">
                 <label htmlFor={HDD_CAPACITY}>
-                    {HDD_CAPACITY} *
+                    HDD Capacity (GB) *
                 </label>
                 <CommonInput
                     id={HDD_CAPACITY}

@@ -35,7 +35,7 @@ export function DevicesProvider({ children }) {
     const [deviceToEdit, setDeviceToEdit] = useState({});
 
     useEffect(() => {
-        setDevices(testDevices);
+        setDevices(formatDevicesForUI(testDevices));
     }, []);
 
     const editDevice = (deviceId) => {

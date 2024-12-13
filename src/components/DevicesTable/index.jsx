@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
 import { Fragment, useState } from 'react';
 
 import { EditDeleteButton } from '../EditDeleteButton';
 import AppleIcon from '../../assets/apple.svg';
 import WindowsIcon from '../../assets/windows.svg';
 import LinuxIcon from '../../assets/linux.svg';
-import { LINUX, MAC, WINDOWS } from '../../constants';
+import { LINUX_WORKSTATION, MAC_WORKSTATION, WINDOWS_WORKSTATION } from '../../constants';
+import { useDevices } from '../../contexts/DevicesContext';
 import { capitalize } from '../../utils';
 
 
@@ -13,19 +13,20 @@ import './index.css';
 
 const getIcon = (type) => {
     switch (capitalize(type)) {
-        case WINDOWS:
+        case WINDOWS_WORKSTATION:
             return WindowsIcon;
-        case MAC:
+        case MAC_WORKSTATION:
             return AppleIcon;
-        case LINUX:
+        case LINUX_WORKSTATION:
             return LinuxIcon;
         default:
             return '';
     }
 }
 
-export const DevicesTable = ({ devices }) => {
+export const DevicesTable = () => {
     const [activeRow, setActiveRow] = useState(null)
+    const { devices } = useDevices()
 
     return (
         <div className="device-table" onMouseLeave={() => setActiveRow(null)}>
@@ -41,7 +42,7 @@ export const DevicesTable = ({ devices }) => {
                                     <span>{device.system_name}</span>
                                 </div>
                                 <div className="device-table_row--device-details">
-                                    {capitalize(device.type)} workstation - {device.hdd_capacity} GB
+                                    {device.type} - {device.hdd_capacity} GB
                                 </div>
                             </div>
                             <div className='device-table_row--right-content'>
@@ -58,12 +59,3 @@ export const DevicesTable = ({ devices }) => {
         </div>
     )
 }
-
-DevicesTable.propTypes = {
-    devices: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        system_name: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        hdd_capacity: PropTypes.string.isRequired,
-    })).isRequired,
-}  
