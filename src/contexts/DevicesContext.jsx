@@ -10,13 +10,13 @@ const testDevices = [
     },
     {
         id: 2,
-        system_name: 'DESKTOP-TWO',
+        system_name: 'DESKTOP-TWO-Z',
         type: 'MAC',
         hdd_capacity: '256',
     },
     {
         id: 3,
-        system_name: 'DESKTOP-THREE',
+        system_name: 'DESKTOP-THREE-Z',
         type: 'LINUX',
         hdd_capacity: '512',
     },
@@ -26,17 +26,26 @@ const testDevices = [
 const DevicesContext = createContext({
     devices: [],
     deviceToEdit: null,
+    formatDevices: () => { },
     editDevice: () => { },
+    formattedDevicesList: [],
 });
 
 // eslint-disable-next-line react/prop-types
 export function DevicesProvider({ children }) {
     const [devices, setDevices] = useState([]);
+    const [formattedDevicesList, setFormattedDevicesList] = useState([]);
     const [deviceToEdit, setDeviceToEdit] = useState({});
 
     useEffect(() => {
-        setDevices(formatDevicesForUI(testDevices));
+        const initialDevices = formatDevicesForUI(testDevices)
+        setDevices(initialDevices);
+        setFormattedDevicesList(initialDevices);
     }, []);
+
+    const formatDevices = (format) => {
+        setFormattedDevicesList(format(devices));
+    };
 
     const editDevice = (deviceId) => {
         if (!deviceId) {
@@ -50,8 +59,10 @@ export function DevicesProvider({ children }) {
     const value = {
         devices,
         deviceToEdit,
-        editDevice
-    };
+        editDevice,
+        formatDevices,
+        formattedDevicesList,
+    }
 
     return (
         <DevicesContext.Provider value={value}>

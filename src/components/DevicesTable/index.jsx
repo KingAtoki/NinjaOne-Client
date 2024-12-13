@@ -26,13 +26,19 @@ const getIcon = (type) => {
 
 export const DevicesTable = () => {
     const [activeRow, setActiveRow] = useState(null)
-    const { devices } = useDevices()
-
+    const { devices, formattedDevicesList } = useDevices()
+    const noDevicesMatchFilters = !formattedDevicesList.length && devices.length
+  
     return (
         <div className="device-table" onMouseLeave={() => setActiveRow(null)}>
             <span>Device</span>
             <hr />
-            {devices.map(device => {
+            {noDevicesMatchFilters &&
+                <span>
+                    No devices match the selected filters.
+                </span>
+            }
+            {formattedDevicesList.map(device => {
                 return (
                     <Fragment key={device.id} >
                         <div className="device-table_row" onMouseOver={() => setActiveRow(device)} >
