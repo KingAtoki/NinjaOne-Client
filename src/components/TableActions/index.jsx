@@ -9,6 +9,19 @@ import RefreshIcon from '../../assets/refresh.svg';
 import './index.css';
 import { useDevices } from '../../contexts/DevicesContext';
 
+/**
+ * TableActions Component
+ * 
+ * @returns {JSX.Element} A div container with filtering and sorting controls
+ * 
+ * @component
+ * @description
+ * This component provides a set of controls for filtering and sorting device data:
+ * - Text search filter for device names
+ * - Device type dropdown filter
+ * - Sort method dropdown
+ * - Refresh button to reset all filters
+ */
 export const TableActions = () => {
     const [filter, setFilter] = useState('')
     const [deviceType, setDeviceType] = useState('')

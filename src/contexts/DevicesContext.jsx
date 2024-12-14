@@ -1,8 +1,23 @@
 import { createContext, useState, useContext, useEffect } from 'react';
 import { formatDeviceForBackend, formatDevicesForUI } from '../utils';
-
 import * as devicesApi from '../api/devices'
 
+/**
+ * @typedef {Object} DevicesContextType
+ * @property {Array} devices - Array of all devices
+ * @property {Object|null} deviceToEdit - Currently selected device for editing
+ * @property {Function} formatDevices - Function to format/filter devices list
+ * @property {Function} deviceIdToEdit - Function to set device for editing. Takes an id and uses that to find the corresponding device
+ * @property {Array} formattedDevicesList - Formatted/filtered array of devices
+ * @property {Function} addDevice - Function to add new device
+ * @property {Function} removeDevice - Function to remove device
+ * @property {Function} editDevice - Function to edit existing device
+ */
+
+/**
+ * Initial context value with default empty functions
+ * @type {DevicesContextType}
+ */
 const DevicesContext = createContext({
     devices: [],
     deviceToEdit: null,
@@ -14,6 +29,17 @@ const DevicesContext = createContext({
     editDevice: () => { },
 });
 
+/**
+ * DevicesProvider Component
+ *
+ * @component
+ * @description
+ * Provides context for managing devices data and operations. Includes:
+ * - Device list state management
+ * - CRUD operations with API integration
+ * - Device formatting utilities
+ * - Error handling
+ */
 // eslint-disable-next-line react/prop-types
 export function DevicesProvider({ children }) {
     const [devices, setDevices] = useState([]);
@@ -24,6 +50,12 @@ export function DevicesProvider({ children }) {
         getDevices();
     }, []);
 
+    /**
+     * Fetches devices from API and updates state
+     * 
+     * @async
+     * @function
+     */
     const getDevices = async () => {
         try {
             const data = await devicesApi.get()
@@ -35,6 +67,13 @@ export function DevicesProvider({ children }) {
         }
     }
 
+    /**
+     * Adds a new device
+     * 
+     * @async
+     * @function
+     * @param {Object} device - Device to add
+     */
     const addDevice = async (device) => {
         const formattedDevice = formatDeviceForBackend(device);
         try {
@@ -45,6 +84,13 @@ export function DevicesProvider({ children }) {
         }
     }
 
+    /**
+     * Updates an existing device
+     * 
+     * @async
+     * @function
+     * @param {Object} device - Device data to update
+     */
     const editDevice = async (device) => {
         const formattedDevice = formatDeviceForBackend(device);
         try {
@@ -55,6 +101,13 @@ export function DevicesProvider({ children }) {
         }
     }
 
+    /**
+     * Removes a device
+     * 
+     * @async
+     * @function
+     * @param {string} deviceId - ID of device to remove
+     */
     const removeDevice = async (deviceId) => {
         try {
             await devicesApi.deleteEndpoint(deviceId);
@@ -64,11 +117,22 @@ export function DevicesProvider({ children }) {
         }
     }
 
-
+    /**
+     * Formats and updates the devices list
+     * 
+     * @function
+     * @param {Function} format - Formatting function to apply
+     */
     const formatDevices = (format) => {
         setFormattedDevicesList(format(devices));
     };
 
+    /**
+     * Sets the device to edit based on ID
+     * 
+     * @function
+     * @param {string|null} deviceId - ID of device to edit, or null to clear
+     */
     const deviceIdToEdit = (deviceId) => {
         if (!deviceId) {
             setDeviceToEdit(null);

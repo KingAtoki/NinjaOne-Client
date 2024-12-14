@@ -9,12 +9,33 @@ import { useModal } from '../../contexts/ModalContext';
 
 import './index.css';
 
+/**
+ * Initial state for the device form
+ * @constant
+ * @type {Object}
+ */
 const initialAddDeviceData = {
     [SYSTEM_NAME]: '',
     [DEVICE_TYPE]: '',
     [HDD_CAPACITY]: ''
 }
 
+/**
+ * AddEditForm Component
+ * 
+ * @returns {JSX.Element} A form for adding or editing device information
+ * 
+ * @component
+ * @description
+ * Renders a form with three required fields:
+ * - System Name (text input)
+ * - Device Type (dropdown)
+ * - HDD Capacity (number input)
+ * 
+ * The form adapts its behavior based on whether it's being used for adding
+ * a new device or editing an existing one. It includes validation and
+ * proper form submission handling.
+ */
 export const AddEditForm = () => {
     const [addDeviceData, setAddDeviceData] = useState(initialAddDeviceData);
     const { deviceToEdit, deviceIdToEdit, addDevice, editDevice } = useDevices()

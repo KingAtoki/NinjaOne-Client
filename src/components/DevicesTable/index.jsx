@@ -11,6 +11,13 @@ import { capitalize } from '../../utils';
 
 import './index.css';
 
+/**
+ * Determines the appropriate OS icon based on device type
+ * 
+ * @function
+ * @param {string} type - The device type
+ * @returns {string} Path to the corresponding OS icon
+ */
 const getIcon = (type) => {
     switch (capitalize(type)) {
         case WINDOWS_WORKSTATION:
@@ -24,6 +31,25 @@ const getIcon = (type) => {
     }
 }
 
+/**
+ * DevicesTable Component
+ * 
+ * @returns {JSX.Element} A div container with the devices table
+ * 
+ * @component
+ * @description
+ * Renders a table of devices with the following features:
+ * - Displays device OS icon, name, type, and storage capacity
+ * - Shows edit/delete buttons on row hover
+ * - Handles empty states and filtering
+ * - Responsive to mouse interactions
+ * 
+ * Each device row includes:
+ * - OS specific icon (Windows, Mac, or Linux)
+ * - System name
+ * - Device type and HDD capacity
+ * - Edit/Delete buttons (visible on hover)
+ */
 export const DevicesTable = () => {
     const [activeRow, setActiveRow] = useState(null)
     const { devices, formattedDevicesList } = useDevices()

@@ -7,6 +7,19 @@ import ThreeDotIcon from '../../assets/three-dot.svg';
 import './index.css';
 import { DELETE, EDIT } from '../../constants';
 
+/**
+ * EditDeleteButton Component
+ * 
+ * @param {string|null} props.deviceId - ID of the device to edit/delete
+ * 
+ * @returns {JSX.Element} A button wrapped in a popover with edit/delete options
+ * 
+ * @component
+ * @description
+ * Renders a three-dot menu button that, when clicked, shows a popover with
+ * edit and delete options. When either option is selected, it opens the
+ * corresponding modal and passes the deviceId.
+ */
 export const EditDeleteButton = ({ deviceId = null }) => {
     const { toggleModal } = useModal()
 
