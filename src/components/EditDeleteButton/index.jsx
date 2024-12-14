@@ -35,5 +35,5 @@ export const EditDeleteButton = ({ deviceId = null }) => {
 }
 
 EditDeleteButton.propTypes = {
-    deviceId: PropTypes.number,
+    deviceId: PropTypes.string,
 };  

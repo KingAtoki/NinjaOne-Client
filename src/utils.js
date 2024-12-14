@@ -12,3 +12,10 @@ export const formatDevicesForUI = (devices) => {
         }
     })
 }
+
+export const formatDeviceForBackend = (device) => {
+    return {
+        ...device,
+        [DEVICE_TYPE]: device[DEVICE_TYPE].split(' ')[0].toUpperCase()
+    }
+}

@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 
 import { CommonInput } from '../Inputs/CommonInput';
 import { DropdownInput } from '../Inputs/DropdownInput';
-import { DEVICE_TYPE, DEVICE_TYPE_PLACEHOLDER, deviceTypes, HDD_CAPACITY, SYSTEM_NAME } from '../../constants';
+import { ADD, DEVICE_TYPE, DEVICE_TYPE_PLACEHOLDER, deviceTypes, EDIT, HDD_CAPACITY, SYSTEM_NAME } from '../../constants';
 import { useDevices } from '../../contexts/DevicesContext';
+import { FooterActions } from '../FooterActions';
+import { useModal } from '../../contexts/ModalContext';
 
 import './index.css';
 
@@ -15,17 +17,14 @@ const initialAddDeviceData = {
 
 export const AddEditForm = () => {
     const [addDeviceData, setAddDeviceData] = useState(initialAddDeviceData);
-    const { deviceToEdit } = useDevices()
+    const { deviceToEdit, deviceIdToEdit, addDevice, editDevice } = useDevices()
+    const { isModalOpen, toggleModal } = useModal()
+    const isEditModalOpen = isModalOpen[EDIT]
 
     useEffect(() => {
         if (deviceToEdit) {
             setAddDeviceData(deviceToEdit)
         }
-
-        return () => {
-            setAddDeviceData(initialAddDeviceData)
-        }
-
     }, [deviceToEdit])
 
     const handleChange = (e) => {
@@ -35,8 +34,25 @@ export const AddEditForm = () => {
         });
     };
 
+    const onClose = () => {
+        toggleModal(isEditModalOpen ? EDIT : ADD)
+        handleReset()
+    }
+
+    const handleReset = () => {
+        setAddDeviceData(initialAddDeviceData)
+        deviceIdToEdit(null)
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+        const submitFunction = isEditModalOpen ? editDevice : addDevice
+        submitFunction(addDeviceData)
+        onClose()
+    }
+
     return (
-        <form className="device-form">
+        <form className="device-form" onSubmit={onSubmit}>
             <div className="form-group">
                 <label htmlFor={SYSTEM_NAME}>
                     Name *
@@ -78,6 +94,10 @@ export const AddEditForm = () => {
                     width='490px'
                 />
             </div>
+            <FooterActions
+                onCancel={onClose}
+                onContinue={onSubmit}
+            />
         </form>
     );
 };

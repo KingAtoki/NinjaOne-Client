@@ -12,19 +12,19 @@ import { useDevices } from '../../contexts/DevicesContext';
 export const TableActions = () => {
     const [filter, setFilter] = useState('')
     const [deviceType, setDeviceType] = useState('')
-    const [sortMethod, setSortMethod] = useState(NAME_DESC)
+    const [sortMethod, setSortMethod] = useState(NAME_ASC)
 
     const { formatDevices, devices: originalDevices } = useDevices()
 
     useEffect(() => {
         formatDevices(format)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filter, deviceType, sortMethod])
+    }, [filter, deviceType, sortMethod, originalDevices])
 
     const onRefresh = () => {
         setFilter('')
         setDeviceType('')
-        setSortMethod(NAME_DESC)
+        setSortMethod(NAME_ASC)
     }
 
     const format = (devices) => {
