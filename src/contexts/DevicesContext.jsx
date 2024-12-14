@@ -1,34 +1,17 @@
 import { createContext, useState, useContext, useEffect } from 'react';
-import { formatDevicesForUI } from '../utils';
+import { formatDeviceForBackend, formatDevicesForUI } from '../utils';
 
-const testDevices = [
-    {
-        id: 1,
-        system_name: 'DESKTOP-ONE',
-        type: 'WINDOWS',
-        hdd_capacity: '92',
-    },
-    {
-        id: 2,
-        system_name: 'DESKTOP-TWO-Z',
-        type: 'MAC',
-        hdd_capacity: '256',
-    },
-    {
-        id: 3,
-        system_name: 'DESKTOP-THREE-Z',
-        type: 'LINUX',
-        hdd_capacity: '512',
-    },
-]
-
+import * as devicesApi from '../api/devices'
 
 const DevicesContext = createContext({
     devices: [],
     deviceToEdit: null,
     formatDevices: () => { },
-    editDevice: () => { },
+    deviceIdToEdit: () => { },
     formattedDevicesList: [],
+    addDevice: () => { },
+    removeDevice: () => { },
+    editDevice: () => { },
 });
 
 // eslint-disable-next-line react/prop-types
@@ -38,30 +21,72 @@ export function DevicesProvider({ children }) {
     const [deviceToEdit, setDeviceToEdit] = useState({});
 
     useEffect(() => {
-        const initialDevices = formatDevicesForUI(testDevices)
-        setDevices(initialDevices);
-        setFormattedDevicesList(initialDevices);
+        getDevices();
     }, []);
+
+    const getDevices = async () => {
+        try {
+            const data = await devicesApi.get()
+            const formattedDevices = formatDevicesForUI(data);
+            setDevices(formattedDevices);
+            setFormattedDevicesList(formattedDevices);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const addDevice = async (device) => {
+        const formattedDevice = formatDeviceForBackend(device);
+        try {
+            await devicesApi.post(formattedDevice);
+            getDevices();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const editDevice = async (device) => {
+        const formattedDevice = formatDeviceForBackend(device);
+        try {
+            await devicesApi.put(formattedDevice);
+            getDevices();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const removeDevice = async (deviceId) => {
+        try {
+            await devicesApi.deleteEndpoint(deviceId);
+            getDevices();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 
     const formatDevices = (format) => {
         setFormattedDevicesList(format(devices));
     };
 
-    const editDevice = (deviceId) => {
+    const deviceIdToEdit = (deviceId) => {
         if (!deviceId) {
             setDeviceToEdit(null);
         } else {
             const selectedDevice = devices.find(device => device.id === deviceId);
-            setDeviceToEdit(formatDevicesForUI([selectedDevice])[0]);
+            setDeviceToEdit(selectedDevice);
         }
     };
 
     const value = {
         devices,
         deviceToEdit,
-        editDevice,
+        deviceIdToEdit,
         formatDevices,
         formattedDevicesList,
+        addDevice,
+        removeDevice,
+        editDevice
     }
 
     return (

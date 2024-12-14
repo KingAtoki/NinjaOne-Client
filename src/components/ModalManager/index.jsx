@@ -2,13 +2,14 @@ import { ADD, DELETE, EDIT, SYSTEM_NAME } from "../../constants"
 import { useDevices } from "../../contexts/DevicesContext"
 import { useModal } from "../../contexts/ModalContext"
 import { AddEditForm } from "../AddEditForm"
+import { FooterActions } from "../FooterActions"
 import { Modal } from "../Modal"
 
 import './index.css'
 
 export const ModalManager = () => {
     const { isModalOpen, toggleModal } = useModal()
-    const { editDevice, deviceToEdit } = useDevices()
+    const { deviceIdToEdit, deviceToEdit, removeDevice } = useDevices()
 
     return (
         <div>
@@ -32,17 +33,6 @@ export const ModalManager = () => {
                 <Modal
                     title='Edit device'
                     onClose={() => toggleModal(EDIT)}
-                    cancelBtnProps={{
-                        text: 'Cancel',
-                        onCancel: () => {
-                            toggleModal(EDIT)
-                            editDevice(null)
-                        }
-                    }}
-                    continueBtnProps={{
-                        text: 'Submit',
-                        onContinue: () => console.log('Submitted')
-                    }}
                 >
                     <AddEditForm />
                 </Modal>
@@ -51,22 +41,23 @@ export const ModalManager = () => {
                 <Modal
                     title='Delete device?'
                     onClose={() => toggleModal(DELETE)}
-                    cancelBtnProps={{
-                        text: 'Cancel',
-                        onCancel: () => {
-                            toggleModal(DELETE)
-                        }
-                    }}
-                    continueBtnProps={{
-                        text: 'Delete',
-                        onContinue: () => {
-                            console.log('Delete')
-                            editDevice(null)
-                        },
-                        isDelete: true
-                    }}
+
                 >
-                    <span className="delete-modal-text">You are about to delete the device <strong>{deviceToEdit?.[SYSTEM_NAME]}</strong>. This action cannot be undone.</span>                </Modal>
+                    <span className="delete-modal-text">
+                        You are about to delete the device <strong>{deviceToEdit?.[SYSTEM_NAME]}</strong>. This action cannot be undone.
+                    </span>
+                    <FooterActions
+                        onCancel={() => {
+                            toggleModal(DELETE)
+                            deviceIdToEdit(null)
+                        }}
+                        onContinue={() => {
+                            removeDevice(deviceToEdit?.id)
+                            toggleModal(DELETE)
+                            deviceIdToEdit(null)
+                        }}
+                    />
+                </Modal>
             }
 
         </div>

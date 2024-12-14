@@ -1,0 +1,42 @@
+.footer-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    padding: 16px 0;
+}
+
+.cancel-button {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    color: #374151;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 8px 16px;
+}
+
+.cancel-button:hover {
+    background-color: #f9fafb;
+}
+
+.continue-button {
+    background-color: #337AB7;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 8px 16px;
+}
+
+.continue-button:hover {
+    background-color: #1a588e;
+}
+
+.continue-button.isDelete {
+    background-color: #D53948;
+}
+
+.continue-button.isDelete:hover {
+    background-color: #dd1111;
+}

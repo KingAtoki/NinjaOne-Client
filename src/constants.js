@@ -24,8 +24,8 @@ const deviceTypes = [
 ];
 
 const sortMethods = [
-    { value: NAME_DESC, label: NAME_DESC },
     { value: NAME_ASC, label: NAME_ASC },
+    { value: NAME_DESC, label: NAME_DESC },
     { value: CAPACITY_ASC, label: CAPACITY_ASC },
     { value: CAPACITY_DESC, label: CAPACITY_DESC },
 ]
@@ -50,5 +50,5 @@ export {
     DELETE,
     WINDOWS_WORKSTATION,
     MAC_WORKSTATION,
-    LINUX_WORKSTATION
+    LINUX_WORKSTATION,
 }
