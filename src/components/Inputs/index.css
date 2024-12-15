@@ -8,6 +8,10 @@
   border-radius: 4px;
 }
 
+.input-wrapper.invalid {
+  border-color: #D53948;
+}
+
 .input-wrapper .prefix {
   position: absolute;
   left: 12px;

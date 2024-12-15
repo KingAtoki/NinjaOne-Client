@@ -11,6 +11,7 @@ export const DropdownInput = ({
   prefix = "",
   value,
   onChange = () => { },
+  isInvalid,
   ...rest
 }) => {
   const [prefixWidth, setPrefixWidth] = useState(0);
@@ -24,7 +25,7 @@ export const DropdownInput = ({
   }, []);
 
   return (
-    <div className='input-wrapper'>
+    <div className={`input-wrapper${isInvalid ? ' invalid' : ''}`}>
       {prefix && <span className='prefix' ref={prefixRef}>{prefix}</span>}
       <select
         value={value}
@@ -53,4 +54,5 @@ DropdownInput.propTypes = {
   prefix: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
+  isInvalid: PropTypes.bool,
 };

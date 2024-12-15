@@ -2,9 +2,17 @@ import PropTypes from 'prop-types';
 
 import '../index.css';
 
-export const CommonInput = ({ prefix = null, placeholder = "", value = "", onChange = () => {}, width, ...rest }) => {
+export const CommonInput = ({
+    prefix = null,
+    placeholder = "",
+    value = "",
+    onChange = () => { },
+    width,
+    isInvalid = false,
+    ...rest
+}) => {
     return (
-        <div className='input-wrapper' style={{ width }}>
+        <div className={`input-wrapper${isInvalid ? ' invalid' : ''}`} style={{ width }}>
             {prefix}
             <input
                 type="text"
@@ -23,4 +31,5 @@ CommonInput.propTypes = {
     onChange: PropTypes.func,
     prefix: PropTypes.element,
     width: PropTypes.string.isRequired,
+    isInvalid: PropTypes.bool,
 }

@@ -37,7 +37,7 @@ export const EditDeleteButton = ({ deviceId = null }) => {
         </div>
     );
     return (
-        <div className="edit-delete-button">
+        <div className="edit-delete-button" data-testid='edit-delete-button'>
             <Popover content={content}>
                 <button>
                     <img src={ThreeDotIcon} alt='three-dots' />

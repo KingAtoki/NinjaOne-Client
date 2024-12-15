@@ -7,7 +7,7 @@ import '../index.css';
 
 export const SearchInput = ({ value = "", onChange = () => {} }) => {
     const prefix = <img src={SearchIcon} alt="search" className="search-icon" />;
-    return <CommonInput prefix={prefix} placeholder='Search' value={value} onChange={onChange} width='270px' />
+    return <CommonInput type='search' prefix={prefix} placeholder='Search' value={value} onChange={onChange} width='270px' />
 }
 
 SearchInput.propTypes = {

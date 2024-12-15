@@ -1,9 +1,9 @@
 import { ADD, DELETE, EDIT, SYSTEM_NAME } from "../../constants"
 import { useDevices } from "../../contexts/DevicesContext"
 import { useModal } from "../../contexts/ModalContext"
-import { AddEditForm } from "../AddEditForm"
-import { FooterActions } from "../FooterActions"
-import { Modal } from "../Modal"
+import { AddDeviceModal } from "./AddDeviceModal"
+import { DeleteDeviceModal } from "./DeleteDeviceModal"
+import { EditDeviceModal } from "./EditDeviceModal"
 
 import './index.css'
 
@@ -28,50 +28,32 @@ import './index.css'
  * - useDevices: Manages device related operations and state
  */
 export const ModalManager = () => {
-    const { isModalOpen, toggleModal } = useModal()
-    const { deviceIdToEdit, deviceToEdit, removeDevice } = useDevices()
+  const { isModalOpen, toggleModal } = useModal();
+  const { deviceIdToEdit, deviceToEdit, removeDevice } = useDevices();
 
-    return (
-        <div>
-            {isModalOpen[ADD] &&
-                <Modal
-                    title='Add device'
-                    onClose={() => toggleModal(ADD)}
-                >
-                    <AddEditForm />
-                </Modal>
-            }
-            {isModalOpen[EDIT] &&
-                <Modal
-                    title='Edit device'
-                    onClose={() => toggleModal(EDIT)}
-                >
-                    <AddEditForm />
-                </Modal>
-            }
-            {isModalOpen[DELETE] &&
-                <Modal
-                    title='Delete device?'
-                    onClose={() => toggleModal(DELETE)}
+  const handleDeleteCancel = () => {
+    toggleModal(DELETE);
+    deviceIdToEdit(null);
+  };
 
-                >
-                    <span className="delete-modal-text">
-                        You are about to delete the device <strong>{deviceToEdit?.[SYSTEM_NAME]}</strong>. This action cannot be undone.
-                    </span>
-                    <FooterActions
-                        onCancel={() => {
-                            toggleModal(DELETE)
-                            deviceIdToEdit(null)
-                        }}
-                        onContinue={() => {
-                            removeDevice(deviceToEdit?.id)
-                            toggleModal(DELETE)
-                            deviceIdToEdit(null)
-                        }}
-                    />
-                </Modal>
-            }
+  const handleDelete = () => {
+    removeDevice(deviceToEdit?.id);
+    toggleModal(DELETE);
+    deviceIdToEdit(null);
+  };
 
-        </div>
-    )
-}
+  return (
+    <div>
+      {isModalOpen[ADD] && <AddDeviceModal onClose={() => toggleModal(ADD)} />}
+      {isModalOpen[EDIT] && <EditDeviceModal onClose={() => toggleModal(EDIT)} />}
+      {isModalOpen[DELETE] && (
+        <DeleteDeviceModal
+          deviceName={deviceToEdit?.[SYSTEM_NAME]}
+          onClose={() => toggleModal(DELETE)}
+          onCancel={handleDeleteCancel}
+          onDelete={handleDelete}
+        />
+      )}
+    </div>
+  );
+};

@@ -30,6 +30,8 @@ const sortMethods = [
     { value: CAPACITY_DESC, label: CAPACITY_DESC },
 ]
 
+const { VITE_BASE_URL: BASE_URL } = import.meta.env;
+
 export {
     NAME,
     CAPACITY,
@@ -51,4 +53,5 @@ export {
     WINDOWS_WORKSTATION,
     MAC_WORKSTATION,
     LINUX_WORKSTATION,
+    BASE_URL,
 }
