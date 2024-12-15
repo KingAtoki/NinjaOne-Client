@@ -79,4 +79,15 @@ describe('DevicesTable', () => {
     expect(images[0]).toHaveAttribute('alt', 'Windows workstation');
     expect(images[1]).toHaveAttribute('alt', 'Mac workstation');
   });
+
+  test('displays no devices message when devices array is empty', async () => {
+    mockUseDevices.mockReturnValue({
+      devices: [],
+      formattedDevicesList: [],
+    });
+
+    await renderWithProviders(<DevicesTable />);
+    
+    expect(screen.getByText('No devices.')).toBeInTheDocument();
+  });
 });

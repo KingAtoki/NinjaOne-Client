@@ -64,6 +64,7 @@ export function DevicesProvider({ children }) {
             setFormattedDevicesList(formattedDevices);
         } catch (error) {
             console.error(error);
+            console.error('Is the server running?');
         }
     }
 

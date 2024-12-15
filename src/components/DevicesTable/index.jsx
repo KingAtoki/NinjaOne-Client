@@ -53,12 +53,19 @@ const getIcon = (type) => {
 export const DevicesTable = () => {
     const [activeRow, setActiveRow] = useState(null)
     const { devices, formattedDevicesList } = useDevices()
-    const noDevicesMatchFilters = !formattedDevicesList.length && devices.length
+    const noDevicesMatchFilters = Boolean(!formattedDevicesList.length && devices.length)
+    const noDevices = !devices.length
+
   
     return (
         <div className="device-table" onMouseLeave={() => setActiveRow(null)}>
             <span>Device</span>
             <hr />
+            {noDevices &&
+                <span>
+                    No devices.
+                </span>
+            }
             {noDevicesMatchFilters &&
                 <span>
                     No devices match the selected filters.
