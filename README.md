@@ -10,6 +10,13 @@ Ensure you have the following installed:
 - [Node.js](https://nodejs.org/) (version 20 or higher)
 - [npm](https://www.npmjs.com/)
 
+If you're using [nvm](https://github.com/nvm-sh/nvm/) (Node Version Manager), you can switch to the correct Node.js version by running:
+
+```sh
+nvm use
+```
+This will automatically use the Node.js version specified in the .nvmrc file.
+
 ### Installation
 
 1. Clone the repository:
@@ -35,4 +42,11 @@ Ensure you have the following installed:
 To start the development server, run:
 ```sh
 npm run dev
+```
+
+### Running Tests
+
+To run all tests, run:
+```sh
+npm run test
 ```
