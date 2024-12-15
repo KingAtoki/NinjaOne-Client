@@ -1,9 +1,45 @@
 /* eslint-disable react-refresh/only-export-components */
 import { jest } from '@jest/globals';
+import { afterAll, beforeAll, beforeEach } from '@jest/globals'
 import { render, act } from '@testing-library/react'
 import { DevicesProvider } from './contexts/DevicesContext';
 import { ModalProvider } from './contexts/ModalContext';
 import mockDevicesApi from './__mocks__/api/devices';
+
+const mockDevices = [
+  { 
+    id: '1',
+    system_name: "Windows Device",
+    type: "Windows workstation",
+    hdd_capacity: '250'
+  }
+];
+
+// eslint-disable-next-line no-undef
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    ok: true,
+    json: () => Promise.resolve(mockDevices)
+  })
+);
+
+beforeEach(() => {
+  fetch.mockClear();
+});
+
+const originalError = console.error;
+beforeAll(() => {
+  console.error = (...args) => {
+    if (/Warning/.test(args[0])) {
+      return;
+    }
+    originalError.call(console, ...args);
+  };
+});
+
+afterAll(() => {
+  console.error = originalError;
+});
 
 jest.mock('./constants', () => ({
     WINDOWS_WORKSTATION: 'Windows workstation',
@@ -43,6 +79,7 @@ export const clearMocks = () => {
   mockDevicesApi.post.mockClear();
   mockDevicesApi.put.mockClear();
   mockDevicesApi.deleteEndpoint.mockClear();
+  fetch.mockClear();
 };
 
 // eslint-disable-next-line react/prop-types
