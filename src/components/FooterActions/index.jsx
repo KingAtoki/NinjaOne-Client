@@ -32,7 +32,7 @@ export const FooterActions = ({ onCancel, onContinue }) => {
         <div className="footer-actions">
             <button className="cancel-button" onClick={onCancel}>Cancel</button>
             <button
-                className={`continue-button ${isDeleteModalOpen && 'isDelete'}`}
+                className={`continue-button${isDeleteModalOpen ? ' isDelete' : ''}`}
                 onClick={onContinue}
             >
                 {isDeleteModalOpen ? 'Delete' : 'Submit'}

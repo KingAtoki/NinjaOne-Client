@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+import { BASE_URL } from "../constants";
 
 const DEFAULT_HEADERS = {
     'Content-Type': 'application/json',

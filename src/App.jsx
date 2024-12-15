@@ -24,7 +24,7 @@ function App() {
         <img src={NinjaOneLogo} className="app-logo" alt="logo" />
       </header>
       <div className='devices-header'>
-        <h2 className='devices-header_title'>Devices</h2>
+        <h2 className='devices-header_title' data-testid='devices-header_title'>Devices</h2>
         <button className='devices-header_add-device' onClick={openAddModal}>
           <img src={plus} className="plus-icon" alt="plus" />
           Add device
