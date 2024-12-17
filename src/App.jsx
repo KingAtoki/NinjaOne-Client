@@ -3,7 +3,6 @@ import plus from './assets/plus.svg'
 import { DevicesTable } from './components/DevicesTable';
 import { TableActions } from './components/TableActions';
 import { ADD } from './constants';
-import { useDevices } from './contexts/DevicesContext';
 import { useModal } from './contexts/ModalContext';
 import { ModalManager } from './components/ModalManager';
 
@@ -11,7 +10,6 @@ import './App.css'
 
 function App() {
   const { toggleModal } = useModal()
-  const { devices } = useDevices()
 
   const openAddModal = () => {
     toggleModal(ADD)
@@ -31,7 +29,7 @@ function App() {
         </button>
       </div>
       <TableActions />
-      <DevicesTable devices={devices} />
+      <DevicesTable />
     </div>
   )
 }
